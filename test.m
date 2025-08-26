@@ -29,3 +29,9 @@ plot(nu,yf)
 hold on
 yline(1)
 
+%%
+clc, clear, close all
+
+
+all_params = initProblem();
+rho_i = solve_rho_i(all_params.Ti_c(:,1), all_params.Bu, SNR_i, c_t, c_Bu)

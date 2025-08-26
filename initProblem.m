@@ -49,10 +49,10 @@ function all_params = initProblem(varargin)
 
     % Noise
     N0          = -174;                             % Noise dBm per Hz
-    Pnu_dBm      = pow2db(db2pow(N0)*Bu);           % IoT-UAV noise power in dBm
-    Pnu          = db2pow(Pnu_dBm)*(1e-3);          % IoT-UAV noise power in W
-    Pnh_dBm      = pow2db(db2pow(N0)*Bh);           % UAV-HAPS noise power in dBm
-    Pnh          = db2pow(Pnh_dBm)*(1e-3);          % UAV-HAPS noise power in W
+    Pnu_dBm      = pow2db(db2pow(N0)*Bu);           % IoT-HAPS noise power in dBm
+    Pnu          = db2pow(Pnu_dBm)*(1e-3);          % IoT-HAPS noise power in W
+    Pnh_dBm      = pow2db(db2pow(N0)*Bh);           % HAPS-LEO noise power in dBm
+    Pnh          = db2pow(Pnh_dBm)*(1e-3);          % HAPS-LEO noise power in W
     Png_dBm      = Pnh_dBm;                         % LEO-GW noise power in dBm
     Png          = Pnh;                             % LEO-GW noise power in W
     
