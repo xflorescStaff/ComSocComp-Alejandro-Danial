@@ -34,26 +34,15 @@ clc, clear, close all
 
 
 all_params = initProblem();
+rho_i = solve_rho_i(all_params.Ti_c(:,1), all_params.Bu, all_params.Pi*all_params.Giu/all_params.Pnu, 10, 10)
+rho_i = solve_rho_i(di, Bu, SNR_i, c_t, c_Bu)
+
+
 di = all_params.Ti_c(:,1);
 Bu = all_params.Bu;
-SNR_i = all_params.Pi*all_params.Giu'/all_params.Pnu;
-c_t = 10000;
-c_Bu = 0.001;
-It = all_params.It;
-
-beth = randomOnes(It, 0.5);
-bets = max(randomOnes(It,0.25), beth);
-
-figure
-hold on
-plot(beth)
-plot(bets)
-
-
-rho_i = solve_rho_i(di, beth, Bu, SNR_i, c_t, c_Bu);
-
-
-
+SNR_i = all_params.Pi*all_params.Giu/all_params.Pnu;
+c_t = 10;
+c_Bu = 10;
 
 
 %%
@@ -101,7 +90,7 @@ c_Bu = 0.001;
             nu_max = nu_max*2;
         end
         fprintf('Loop1\t rho_max = %f \t nu_max = %f\n', rho_max, nu_max)
-        % pause
+        pause
     end
 
     % Start bisection loop
@@ -114,5 +103,5 @@ c_Bu = 0.001;
         else
             nu_min = nu;
         end
-        % fprintf('Loop2\n')
+        fprintf('Loop2\n')
     end
