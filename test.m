@@ -36,9 +36,21 @@ clc, clear, close all
 all_params = initProblem();
 di = all_params.Ti_c(:,1);
 Bu = all_params.Bu;
-SNR_i = all_params.Pi*all_params.Giu'/all_params.Pnu;
+Bh = all_params.Bh;
+
+SNR_i   = all_params.SNR_i;
+SNR_hs  = all_params.SNR_hs;
+SNR_sg  = all_params.SNR_sg;
+
+% SNR_i = all_params.Pi*all_params.Gih'/all_params.Pnh;
+% 
+% SNR_hs = all_params.Ph*all_params.Ghs/all_params.Pns;
+% 
+% SNR_sg = all_params.Ps*all_params.Gsg/all_params.Png;
+
 c_t = 10000;
 c_Bu = 0.001;
+c_Bh = 0.005;
 It = all_params.It;
 
 beth = randomOnes(It, 0.5);
@@ -50,10 +62,11 @@ plot(beth)
 plot(bets)
 
 
-rho_i = solve_rho_i(di, beth, Bu, SNR_i, c_t, c_Bu);
+% rho_i = solve_rho_i(di, beth, Bu, SNR_i, c_t, c_Bu);
+% 
+% rho_B = solve_rho_H(di, bets, Bh, SNR_hs, SNR_sg, c_t, c_Bh)
 
-
-
+[rho_i, rho_H] = solveBandwidth(all_params, beth, bets, c_t, c_Bu, c_Bh)
 
 
 %%
