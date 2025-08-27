@@ -13,7 +13,7 @@ function rho_i = solve_rho_i(di, beth, Bu, SNR_i, c_t, c_Bu)
     rho_opt_i = sum(sqrt(ai./bi));
 
     if rho_opt_i<=1
-        rho_i = rho_opt_i;
+        rho_i = sqrt(ai./bi);
         return;
     end
 

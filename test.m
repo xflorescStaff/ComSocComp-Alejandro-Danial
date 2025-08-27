@@ -53,6 +53,7 @@ c_Bu = 0.001;
 c_Bh = 0.005;
 It = all_params.It;
 
+
 beth = randomOnes(It, 0.5);
 bets = max(randomOnes(It,0.25), beth);
 

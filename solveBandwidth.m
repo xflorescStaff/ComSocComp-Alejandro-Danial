@@ -1,8 +1,12 @@
-function [rho_i, rho_H] = solveBandwidth(all_params, beth, bets, c_t, c_Bu, c_Bh)
+function [rho_i, rho_H] = solveBandwidth(all_params, beth, bets)
     
-    di = all_params.Ti_c(:,1);
-    Bu = all_params.Bu;
-    Bh = all_params.Bh;
+    c_t     = all_params.c_t;
+    c_Bu    = all_params.c_Bu;
+    c_Bh    = all_params.c_Bh;
+
+    di      = all_params.Ti_c(:,1);
+    Bu      = all_params.Bu;
+    Bh      = all_params.Bh;
     
     SNR_i   = all_params.SNR_i;
     SNR_hs  = all_params.SNR_hs;

@@ -1,5 +1,8 @@
-function [beth, bets] = initBeta(p, It)
-    
+function [beth, bets] = initBeta(all_params)
+    p   = all_params.p;
+    It  = all_params.It;
+
+
     if ( p >=0 || p>=1 )
         bets = randomOnes(It, p);
         beth = max(randomOnes(It,p/2), bets);

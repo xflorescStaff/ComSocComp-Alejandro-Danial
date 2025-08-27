@@ -17,13 +17,14 @@ function all_params = initProblem(varargin)
     if nargin>=5;  tTask_o = varargin{5}{1} ; else ; tTask_o = 1;    end            % Lower,  max delay
     if nargin>=5;  tTask_f = varargin{5}{2} ; else ; tTask_f = 1;    end            % Higher, max delay
     if nargin>=6;  d_iu    = varargin{6} ;    else ; d_iu = 200;     end            % Average distance from IoT nodes to UAV
-    if nargin>=7;  c_t     = varargin{7}{1} ; else ; c_t = 10000;    end            % Cost per delay
-    if nargin>=7;  c_Bu    = varargin{7}{2} ; else ; c_Bu = 0.001;   end            % Cost per IoT-HAPS unit bandwidth
-    if nargin>=7;  c_Bh    = varargin{7}{3} ; else ; c_Bh = 0.005;   end            % Cost per HAPS-LEO-GW unit bandwidth
-    if nargin>=8;  p       = varargin{8} ;    else ; p = 1;          end            % Probability oof offloading for initialization
+    if nargin>=7;  c_t     = varargin{7} ;    else ; c_t = 10000;    end            % Cost per delay
+    if nargin>=8;  c_Bu    = varargin{8} ;    else ; c_Bu = 0.001;   end            % Cost per IoT-HAPS unit bandwidth
+    if nargin>=9;  c_Bh    = varargin{9} ;    else ; c_Bh = 0.005;   end            % Cost per HAPS-LEO-GW unit bandwidth
+    if nargin>=10; p       = varargin{10};    else ; p = 0.005;   end            % Cost per HAPS-LEO-GW unit bandwidth
 
-    % {It, {Fi  , Fhu }, {mTask_o, mTask_f}, {cTask_o, cTask_f}, {tTask_o, tTask_f}, d_iu, {c_t,   c_Bu,  c_Bh},  p }
-    % {14, {64e6, 10e9}, {10e3,    100e3  }, {5,       25     }, {1,       1      }, 200,  {10000, 0.001, 0.005}, 1 }
+    
+    % Probability oof offloading for initialization
+    p = 1;
 
 
     % Carrier frequencies
@@ -36,7 +37,7 @@ function all_params = initProblem(varargin)
     Dua     = lua;
     
     % Bandwidths
-    Bu = 20e6;      % Total Iot-HAPS Bandwidth [Hz]
+    Bu = 1.4e6;     % Bandwidth per Iot-HAPS subchannel [Hz]
     Bh = 100e6;     % Bandwidth per HAPS-LEO-GW  subchannel [Hz]
     
     
