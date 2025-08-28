@@ -13,6 +13,7 @@ fhi = initfh(all_params);
 [rho_i, rho_H] = solveBandwidth(all_params, beth, bets);
 
 % cost_mec = solveCosts()
+% [beth, bets] = solveOffloading()
 cost_mec = ones(all_params.It,1);
 cost_mcc = ones(all_params.It,1);
 
