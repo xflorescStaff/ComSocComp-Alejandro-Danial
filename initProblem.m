@@ -21,6 +21,7 @@ function all_params = initProblem(varargin)
     if nargin>=7;  c_Bu    = varargin{7}{2} ; else ; c_Bu = 0.001;   end            % Cost per IoT-HAPS unit bandwidth
     if nargin>=7;  c_Bh    = varargin{7}{3} ; else ; c_Bh = 0.005;   end            % Cost per HAPS-LEO-GW unit bandwidth
     if nargin>=8;  p       = varargin{8} ;    else ; p = 1;          end            % Probability oof offloading for initialization
+    if nargin>=9;  iMC     = varargin{8} ;    else ; iMC = 0;          end          % MC loop for consistency
 
     % {It, {Fi  , Fhu }, {mTask_o, mTask_f}, {cTask_o, cTask_f}, {tTask_o, tTask_f}, d_iu, {c_t,   c_Bu,  c_Bh},  p }
     % {14, {64e6, 10e9}, {10e3,    100e3  }, {5,       25     }, {1,       1      }, 200,  {10000, 0.001, 0.005}, 1 }
@@ -72,7 +73,7 @@ function all_params = initProblem(varargin)
     
     % gs_ap = getAntPat_Horn(Dua, lua, rs, ru);
     % gh_ap = getAntPat_Cos(2, rh, ru);
-        
+    rng(2018+iMC);
         ri_c        = ( d_iu )*randn(3,It) + rh;
         ri_c(3,:)   = 0;
         
@@ -121,7 +122,7 @@ function all_params = initProblem(varargin)
         %         'fua',  fua, ...
         %         'liu',  liu, ...
         %         'lua',  lua);
-
+    rng(1999+iMC);
         % Task generation
             % Task size (bits)
         di = (mTask_f - mTask_o)*rand(1,It) + mTask_o;

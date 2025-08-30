@@ -18,7 +18,7 @@ function [C_loc, C_mec, C_mcc] = getCosts(all_params, beth, bets, rho_i, rho_H, 
     tp_sg   = all_params.tsg_v;
 
 
-    Ri      = rho_i*Bu.*log2( 1 + SNR_i  );
+    Ri      = rho_i*Bu.*log2( 1 + SNR_i(beth==1)  );
     Rhs     = rho_H*Bh*log2( 1 + SNR_hs );
     Rsg     = rho_H*Bh*log2( 1 + SNR_sg );
 
@@ -29,7 +29,8 @@ function [C_loc, C_mec, C_mcc] = getCosts(all_params, beth, bets, rho_i, rho_H, 
     cl = ci(beth==0);                   % ci for IoT local tasks
 
     dh = di(beth==1);                   % di for IoT-HAPS offloads 
-    Rh = Ri(beth==1);                   % Ri for IoT-HAPS offloads 
+    % Rh = Ri(beth==1);                   % Ri for IoT-HAPS offloads 
+    Rh = Ri;                            % Ri for IoT-HAPS offloads 
 
     dhl = di((beth==1) & (bets==0));       % di for tasks computed att HAPS
     chl = ci((beth==1) & (bets==0));       % ci for tasks computed att HAPS
@@ -45,6 +46,14 @@ function [C_loc, C_mec, C_mcc] = getCosts(all_params, beth, bets, rho_i, rho_H, 
     tih = dh./Rh;                       % Delay for IoT-HAPS offloads
     ths = (sum(ds)/Rhs) + 2*tp_hs;      % Delay for HAPS-LEO offloads
     tsg = (sum(ds)/Rsg) + 2*tp_sg;      % Delay for LEO-GW offloads
+
+    if Rhs == 0
+        ths = 2*tp_hs;
+    end
+
+    if Rsg == 0
+        tsg = 2*tp_sg;
+    end
 
     cmec = cost_mec(beth==1);
     cmcc = cost_mcc(bets==1);
